@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 const player0El = document.querySelector('.player--0');
 const player1El = document.querySelector('.player--1');
 
@@ -19,7 +17,6 @@ const btnHold = document.querySelector('.btn--hold');
 let scores, currentScore, activePlayer, playing;
 
 const init = function () {
- 
   scores = [0, 0];
   currentScore = 0;
   activePlayer = 0;
@@ -53,39 +50,40 @@ btnRoll.addEventListener('click', function () {
     const dice = Math.trunc(Math.random() * 6) + 1;
 
     diceEl.classList.remove('hidden');
-    diceEl.src = `dice-${dice}.png`;
+    diceEl.src = `assets/dice-${dice}.png`;
 
     if (dice !== 1) {
       currentScore += dice;
       document.getElementById(`current--${activePlayer}`).textContent =
         currentScore;
-    }
-    else{
-        switchPlayer();
+    } else {
+      switchPlayer();
     }
   }
 });
 
-btnHold.addEventListener('click',function(){
-    if(playing)
-    {
-        scores[activePlayer]+=currentScore;
-        document.getElementById(`score--${activePlayer}`).textContent=scores[activePlayer];
+btnHold.addEventListener('click', function () {
+  if (playing) {
+    scores[activePlayer] += currentScore;
+    document.getElementById(`score--${activePlayer}`).textContent =
+      scores[activePlayer];
 
-        if(scores[activePlayer]>=20)
-        {
-            playing=false;
+    if (scores[activePlayer] >= 20) {
+      playing = false;
 
-            diceEl.classList.add('hidden');
+      diceEl.classList.add('hidden');
 
-            document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add('player--winner');
 
-            document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
-        }
-        else{
-            switchPlayer();
-        }
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove('player--active');
+    } else {
+      switchPlayer();
     }
+  }
 });
 
-btnNew.addEventListener('click',init);
+btnNew.addEventListener('click', init);
